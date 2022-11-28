@@ -49,7 +49,7 @@ RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     chown -R git:git ${GITEA_HOME}/git
 
 COPY root /
-COPY --from=build-env /go/src/code.gitea.io/gitea/gitea /app/gitea/gitea
+
 RUN ln -s ${GITEA_HOME}/gitea/gitea /usr/local/bin/gitea && \
     rm -rf /var/cache/apk/*
 
