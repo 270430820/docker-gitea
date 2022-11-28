@@ -1,0 +1,6 @@
+#!/bin/bash
+[[ -f ./setup ]] && source ./setup
+
+pushd ${GITEA_HOME}/gitea > /dev/null
+    exec su-exec ${USER} ${GITEA_HOME}/gitea/gitea web
+popd
