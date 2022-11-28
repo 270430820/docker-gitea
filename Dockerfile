@@ -37,7 +37,7 @@ RUN apk -U --no-cache --no-progress add \
     rm -rf /var/cache/apk/*
 
 # 安装GITEA
-RUN mkdir -p ${GITEA_HOME}/{custom/conf,git,gitea} && \
+RUN mkdir -p ${GITEA_HOME}/{custom,git,gitea} && \
   curl -f https://github.com/go-gitea/gitea/releases/download/v$GITEA_VERSION/gitea-$GITEA_VERSION-linux-386 -o ${GITEA_HOME}/gitea/gitea && \
   chmod a+x ${GITEA_HOME}/gitea/gitea && \
   ln -s ${GITEA_HOME}/gitea/gitea /usr/local/bin/gitea
@@ -49,9 +49,6 @@ RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     chown -R git:git ${GITEA_HOME}/git
 
 COPY root /
-
-RUN ln -s ${GITEA_HOME}/gitea/gitea /usr/local/bin/gitea && \
-    rm -rf /var/cache/apk/*
 
 WORKDIR ${GITEA_HOME}
 

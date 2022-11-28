@@ -50,5 +50,6 @@ fi
 
 # only chown if current owner is not already the gitea ${USER}. No recursive check to save time
 if ! [[ $(ls -ld ${GITEA_HOME}/gitea | awk '{print $3}') = ${USER} ]]; then chown -R ${USER}:git ${GITEA_HOME}/gitea; fi
+if ! [[ $(ls -ld ${GITEA_HOME}/custom | awk '{print $3}') = ${USER} ]]; then chown -R ${USER}:git ${GITEA_HOME}/custom; fi
 if ! [[ $(ls -ld ${GITEA_HOME}/git   | awk '{print $3}') = ${USER} ]]; then chown -R ${USER}:git ${GITEA_HOME}/git;   fi
-chmod 0755 ${GITEA_HOME}/gitea ${GITEA_HOME}/git
+chmod 0755 ${GITEA_HOME}/gitea ${GITEA_HOME}/custom ${GITEA_HOME}/git
