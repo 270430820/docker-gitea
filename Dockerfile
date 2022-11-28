@@ -33,7 +33,7 @@ RUN apk -U --no-cache --no-progress add \
     sqlite \
     su-exec \
     tzdata \
-    gnupg && \
+    gnupg \
     xz && \
     rm -rf /var/cache/apk/*
 
