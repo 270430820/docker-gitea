@@ -38,7 +38,9 @@ RUN apk -U --no-cache --no-progress add \
     rm -rf /var/cache/apk/*
 
 # 安装GITEA
-RUN mkdir -p ${GITEA_HOME}/{custom,git,gitea} && \
+RUN mkdir -p ${GITEA_HOME} && \
+  cd ${GITEA_HOME} && \
+  mkdir custom git gitea ssh && \
   curl -fSL https://github.com/go-gitea/gitea/releases/download/v${GITEA_VERSION}/gitea-${GITEA_VERSION}-linux-386.xz -o ${GITEA_HOME}/gitea/gitea-${GITEA_VERSION}-linux-386.xz && \
   cd ${GITEA_HOME}/gitea && \
   xz -d gitea-${GITEA_VERSION}-linux-386.xz && \
@@ -56,12 +58,12 @@ COPY root /
 
 WORKDIR ${GITEA_HOME}
 
-#VOLUME [${GITEA_HOME}]
-
-EXPOSE 22 3000
+VOLUME [${GITEA_HOME}]
 
 USER ${USER}:${USER}
 
 ENTRYPOINT ["/usr/bin/entrypoint"]
+
+EXPOSE 22 3000
 
 CMD ["/bin/s6-svscan", "/etc/s6"]
