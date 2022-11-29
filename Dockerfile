@@ -47,7 +47,7 @@ RUN mkdir -p ${GITEA_HOME}/{custom,git,gitea} && \
   ln -s ${GITEA_HOME}/gitea/gitea /usr/local/bin/gitea
   
 RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
-	addgroup -S -g 1000 git && \
+	  addgroup -S -g 1000 git && \
     adduser -S -H -D -h ${GITEA_HOME}/git -s /bin/bash -u 1000 -G git git && \
     echo "git:$(dd if=/dev/urandom bs=24 count=1 status=none | base64)" | chpasswd && \
     chown -R git:git ${GITEA_HOME}/git
